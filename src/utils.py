@@ -1,7 +1,8 @@
 import openai
 import os
+from dotenv import load_dotenv
 
-openai.api_key ="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"
+openai.api_key = os.getenv("OPENAI_KEY")
 
 def generate_cover_letter(company_name, name, job_description, skills):
     prompt = f"""Write a cover letter addressed to {company_name} for the position of {job_description}. The cover letter should be addressed to {name}, and should highlight the following skills: {skills}."""

@@ -84,10 +84,14 @@
 
     /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
     #main {
-        transition: margin-left .5s;
-        /* If you want a transition effect */
-        padding: 20px;
-        /* margin-left: -25px; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: margin-left .5s; /* If you want a transition effect */
+    padding: 20px;
+    z-index: 9999;
+    /* margin-left: -25px; */
     }
 
     /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -235,14 +239,14 @@
 .form-group-modal input {
     font-family: 'Poppins', sans-serif;
     display: inline-block;
-    width: 30%;
+    width: 450px;
     margin-right: 10px;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     /* text-shadow: 2px 2px #000; */
     color: #000;
-    vertical-align: middle;
-    margin-bottom: 20px;
+    /* vertical-align: middle; */
+    margin-bottom: 15px;
   }
 </style>
 
@@ -252,7 +256,7 @@
         <a href="#">Home</a>
         <a href="#" data-toggle="modal" data-target="#historyModal">History</a>
         <a href="#" data-toggle="modal" data-target="#profile-modal">Profile</a>
-        <a href="#" style="margin-top: 290px;">Logout</a>
+        <a href="/logout" style="margin-top: 290px;">Logout</a>
         <!-- <a href="#">Contact</a> -->
     </div>
 
@@ -324,9 +328,6 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="historyModalLabel">Cover Letter History</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
             <div class="modal-body">
               <table class="table table-striped">
@@ -335,8 +336,8 @@
                     <th scope="col">Company Name</th>
                     <th scope="col">Job Description</th>
                     <th scope="col">Skills</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col">View Cover Letter</th>
+                    <th scope="col">Generate PDF</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -344,99 +345,99 @@
                     <td>Acme Inc.</td>
                     <td>Software Engineer</td>
                     <td>Java, Python, SQL</td>
-                    <td><button type="button" class="btn btn-primary">View</button></td>
-                    <td><button type="button" class="btn btn-secondary">Generate PDF</button></td>
+                    <td><button type="button" id="modal-btn" style="margin-top: 0px;">View</button></td>
+                    <td><button type="button" id="modal-btn" style="margin-top: 0px;">Generate PDF</button></td>
                   </tr>
                   <tr>
                     <td>Globex Corp.</td>
                     <td>Data Analyst</td>
                     <td>R, Excel, SQL</td>
-                    <td><button type="button" class="btn btn-primary">View</button></td>
-                    <td><button type="button" class="btn btn-secondary">Generate PDF</button></td>
+                    <td><button type="button" id="modal-btn" style="margin-top: 0px;">View</button></td>
+                    <td><button type="button" id="modal-btn" style="margin-top: 0px;">Generate PDF</button></td>
                   </tr>
                   <tr>
                     <td>Stark Industries</td>
                     <td>Software Developer</td>
                     <td>C++, Python, Linux</td>
-                    <td><button type="button" class="btn btn-primary">View</button></td>
-                    <td><button type="button" class="btn btn-secondary">Generate PDF</button></td>
+                    <td><button type="button" id="modal-btn" style="margin-top: 0px;">View</button></td>
+                    <td><button type="button" id="modal-btn" style="margin-top: 0px;">Generate PDF</button></td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" id="modal-btn" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
       </div>
 
-<!-- Generate PDF Modal -->
-<div class="modal fade" id="pdf-modal" tabindex="-1" role="dialog" aria-labelledby="pdf-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pdf-modal-label">Generate PDF</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-row">
-                        <div class="col">
-                            <input type="text" class="form-control" id="your-name" placeholder="Your Name">
+    <!-- Generate PDF Modal -->
+    <div class="modal fade" id="pdf-modal" tabindex="-1" role="dialog" aria-labelledby="pdf-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pdf-modal-label">Generate PDF</h5>
+                </div>
+                <div class="modal-body">
+                    <p style="font-size: 13px;">Fill in the details to generate a Cover Letter PDF.</p>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group-modal col-md-6">
+                                <input type="text" class="form-control" id="your-name" placeholder="Your Name">
+                            </div>
+                            <div class="form-group-modal col-md-6">
+                                <input type="text" class="form-control" id="your-address" placeholder="Your Address">
+                            </div>
                         </div>
-                        <div class="col">
-                            <input type="text" class="form-control" id="your-address" placeholder="Your Address">
+                        <div class="form-row">
+                            <div class="form-group-modal col-md-6">
+                                <input type="text" class="form-control" id="your-city-state-zip" placeholder="Your City, State ZIP Code">
+                            </div>
+                            <div class="form-group-modal col-md-6">
+                                <input type="tel" class="form-control" id="your-phone-number" placeholder="Your Phone Number">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <input type="text" class="form-control" id="your-city-state-zip" placeholder="Your City, State ZIP Code">
+                        <div class="form-row">
+                            <div class="form-group-modal col-md-6">
+                                <input type="email" class="form-control" id="your-email-address" placeholder="Your Email Address">
+                            </div>
+                            <div class="form-group-modal col-md-6">
+                                <input type="date" class="form-control" id="date" placeholder="Date">
+                            </div>
                         </div>
-                        <div class="col">
-                            <input type="tel" class="form-control" id="your-phone-number" placeholder="Your Phone Number">
+                        <div class="form-row">
+                            <div class="form-group-modal col-md-6">
+                                <input type="text" class="form-control" id="recipient-name" placeholder="Recipient Name">
+                            </div>
+                            <div class="form-group-modal col-md-6">
+                                <input type="text" class="form-control" id="recipient-title" placeholder="Recipient Title">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <input type="email" class="form-control" id="your-email-address" placeholder="Your Email Address">
+                        <div class="form-row">
+                            <div class="form-group-modal col-md-6">
+                                <input type="text" class="form-control" id="organization-name" placeholder="Organization Name">
+                            </div>
+                            <div class="form-group-modal col-md-6">
+                                <input type="text" class="form-control" id="organization-address" placeholder="Organization Address">
+                            </div>
                         </div>
-                        <div class="col">
-                            <input type="date" class="form-control" id="date" placeholder="Date">
+                        <div class="form-row">
+                            <div class="form-group-modal col-md-6">
+                                <input type="text" class="form-control" id="organization-city-state-zip" placeholder="Organization City, State ZIP Code">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <input type="text" class="form-control" id="recipient-name" placeholder="Recipient Name">
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" id="recipient-title" placeholder="Recipient Title">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <input type="text" class="form-control" id="organization-name" placeholder="Organization Name">
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" id="organization-address" placeholder="Organization Address">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <input type="text" class="form-control" id="organization-city-state-zip" placeholder="Organization City, State ZIP Code">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Download PDF</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="modal-btn" data-dismiss="modal" style="margin-top: 0px;">Close</button>
+                    <button type="button" id="modal-btn" style="margin-top: 0px;">Download PDF</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+  
 
       
       

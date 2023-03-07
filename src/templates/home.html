@@ -12,8 +12,7 @@
   <link rel='stylesheet' id='roboto-subset.css-css'
       href='https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5'
       type='text/css' media='all' />
-  <!-- <link rel="stylesheet" href="./static/css/style.css.css" type="text/css" media="all"> -->
-  <link rel="stylesheet" href="./static/css/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
@@ -42,23 +41,23 @@
       <!-- <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black"> -->
 
       <a class="navbar-brand">
-        <img src="./static/images/transparent-logo.png" alt="CoverEase Logo" height="50px">
+        <img src="{{ url_for('static', filename='images/transparent-logo.png') }}" alt="CoverEase Logo" height="50px">
       </a>
       
 
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <!-- <h1>CoverEase</h1> -->
         <p id="text"></p>
-        <button type="submit" class="btn btn-dark d-inline-block" id="signin-btn" style="font-size: 13px;">Click Here to try it out!</button>
-        <!-- <button type="submit" class="btn btn-dark d-inline-block" id="signup-btn" style="margin-left: 10px; font-size: 13px;">Sign up</button> -->
+        <a href="/login">
+          <button type="submit" class="btn btn-dark d-inline-block" id="signin-btn" style="font-size: 13px;">Click Here to try it out!</button>
+        </a>
       </div>
 
       <div class="col-md-6">
         <div class="card shadow">
           <div class="card-video">
-            <video src="./test.mp4" allowfullscreen autoplay muted loop style="width: 100%; height: 100%;"></video>
+            <video src="{{ url_for('static', filename='images/demo.mp4') }}" allowfullscreen autoplay muted loop style="width: 100%; height: 100%;"></video>
           </div>
         </div>
       </div>
@@ -91,7 +90,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
         </script>
-    <script src="./static/js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 <script>
   const text = "Are you tired of spending hours crafting the perfect cover letter for every job application? Look no further than CoverEase - the ultimate solution to your cover letter needs. With our cutting-edge AI technology, you can generate professional-quality cover letters in minutes, without ever having to write a single word yourself."
   let i = 0;

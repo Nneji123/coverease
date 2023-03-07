@@ -36,20 +36,21 @@ body {
                 </div>
                 <p class="lead text-center mb-4">Sign in to CoverEase!</p>
                 <!-- Login Form -->
-                <form action="test.html">
+                <form action="/login" method="post">
                     <div class="form-group row mb-3">
                         <div class="row justify-content-center mb-4">
                             <div class="col-md-3 text-center">
-                                <a href="#"><i class="fab fa-github fa-2x"></i></a>
+                                <a href="/login/github"><i class="fab fa-github fa-2x"></i></a>
                             </div>
                             <div class="col-md-3 text-center">
-                                <a href="#"><i class="fab fa-google fa-2x"></i></a>
+                                <!-- val={{url_for('google.signin_google')}} -->
+                                <a href="/signin"><i class="fab fa-google fa-2x"></i></a>
                             </div>
                         </div>
                         <p class="lead text-center mb-4">or</p>
-                        <div class="col-md-8 mx-auto">
+                        <!-- <div class="col-md-8 mx-auto">
                             <input type="text" class="form-control" id="username" placeholder="Username" style="width: 100%">
-                        </div>
+                        </div> -->
                     </div>
                     <div class="form-group row mb-3">
                         <div class="col-md-8 mx-auto">
@@ -62,14 +63,14 @@ body {
                         </div>
                     </div>
                     <div class="d-grid gap-2">
-                        <a type="button" class="btn btn-dark" id="signin-btn" style="margin-bottom: 20px; font-size: 13px;">Sign in</a>
+                        <a href="/login"  type="button" class="btn btn-dark" id="signin-btn" style="margin-bottom: 20px; font-size: 13px;">Sign in</a>
                     </div>
                     <div class="row mt-3">
                         <div class="col text-start">
                             <a href="#">Forgot password?</a>
                         </div>
                         <div class="col text-end">
-                            <a href="#">Not registered? Click here</a>
+                            <a href="/register">Not registered? Click here</a>
                         </div>
                     </div>
                 </form>
