@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(100), nullable=False)
     letters = db.relationship('Letter', backref='user_letters', lazy=True)
     
-class GoogleUser(db.Model):
+class GoogleUser(db.Model, UserMixin):
     id = db.Column(db.String(36), primary_key=True, default=str(uuid.uuid4()))
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(50), unique=True, nullable=False)
@@ -21,9 +21,11 @@ class GoogleUser(db.Model):
     google_letters = db.relationship('Letter', backref='googleuser_letters', lazy=True)
     # user_id = db.Column(db.String(36), db.ForeignKey('user.id'), nullable=False)
 
-class GithubUser(db.Model):
+class GithubUser(db.Model, UserMixin):
     id = db.Column(db.String(36), primary_key=True, default=str(uuid.uuid4()))
+    username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(50), unique=True, nullable=False)
+    picture = db.Column(db.String)
     
     github_letters = db.relationship('Letter', backref='githubuser_letters', lazy=True, overlaps="githubuser_letters")
     # user_id = db.Column(db.String(36), db.ForeignKey('user.id'), nullable=False)

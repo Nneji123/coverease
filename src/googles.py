@@ -6,7 +6,9 @@ import sqlalchemy
 
 
 google_login = make_google_blueprint(
-    scope=["profile", "email"]
+    scope=["profile", "email"],
+    redirect_to="google.signin_google"
+    
 )
 
 login_manager = LoginManager()

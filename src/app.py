@@ -16,7 +16,8 @@ from index import index  # CustomIndexView
 from login import login
 from home import home
 from logout import logout
-from google import google_login
+from googles import google_login
+from github import github_login
 from register import register
 from models import User, GoogleUser, GithubUser, db
 # from models import (
@@ -52,13 +53,15 @@ app.register_blueprint(login)
 app.register_blueprint(logout)
 app.register_blueprint(home)
 app.register_blueprint(register)
+app.register_blueprint(github_login, url_prefix="/login")
 app.register_blueprint(google_login, url_prefix="/signin")
 
 serializer = URLSafeTimedSerializer("secret")
 
 app.config["GOOGLE_OAUTH_CLIENT_ID"] = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
 app.config["GOOGLE_OAUTH_CLIENT_SECRET"] = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
-
+app.config["GITHUB_OAUTH_CLIENT_ID"] = os.environ.get("GITHUB_OAUTH_CLIENT_ID")
+app.config["GITHUB_OAUTH_CLIENT_SECRET"] = os.environ.get("GITHUB_OAUTH_CLIENT_SECRET")
 # admin = Admin(
 #     app, name="CoverEase", template_mode="bootstrap4", index_view=CustomIndexView()
 # )

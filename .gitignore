@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 .env
 .vscode/
+database.db
 # tests/
 # test.yml
