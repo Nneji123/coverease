@@ -1,0 +1,209 @@
+/* Navbar */
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+/* body {
+    background-image: url("background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  } */
+
+
+
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+  color: #fff;
+  font-size: 24px;
+}
+
+#navbar-home {
+    font-family: 'Poppins', sans-serif;
+  color: #fff;
+  font-size: 10px;
+}
+
+.nav-link {
+    font-family: 'Poppins', sans-serif;
+  color: #fff;
+  font-size: 24px;
+}
+
+.custom-container {
+    width: 40%;
+    margin: -100px auto;
+    text-align: justify;
+  }
+
+  .custom-container-login {
+    width: 35%;
+    margin: 0 auto;
+    text-align: justify;
+    /* background-color: #f8f5f5; */
+    padding: 20px;
+  }
+
+
+/* CoverEase Title */
+#coverease {
+    font-family: 'Poppins', sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  /* text-shadow: 2px 2px #000; */
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-align: center;
+  background: radial-gradient(circle at 10% 20%, rgb(69, 86, 102) 0%, rgb(34, 34, 34) 90%);
+}
+
+#coverease-info {
+    font-family: 'Poppins', sans-serif;
+  font-size: 36px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+/* Headings and Paragraphs */
+h1,
+p {
+    font-family: 'Poppins', sans-serif;
+  font-size: 100px;
+  font-weight: bold;
+  /* text-shadow: 2px 2px #000; */
+  color: #000;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+a{
+font-family: 'Poppins', sans-serif;
+font-size: 13px;
+/* font-weight: bold; */
+/* text-shadow: 2px 2px #000; */
+color: #000;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
+/* Form */
+.form-group label {
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+    width: 30%;
+    margin-right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    /* text-shadow: 2px 2px #000; */
+    color: #000;
+    vertical-align: middle;
+    margin-bottom: 20px;
+  }
+  
+  .form-group select {
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+    width: 65%;
+    vertical-align: middle;
+    font-size: 18px;
+  }
+
+.form-control {
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+    width: 65%;
+    vertical-align: middle;
+    font-size: 18px;
+}
+
+.form-label{
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+    width: 65%;
+    vertical-align: middle;
+    font-size: 18px;
+}
+
+#sticky-footer{
+bottom: 0;
+position: fixed;
+width: 100%;
+
+}
+
+
+/* Generate Button */
+#generate-btn {
+    font-family: 'Poppins', sans-serif;
+  background-color: #000;
+  color: #fff;
+  font-size: 18px;
+  /* box-shadow: 2px 2px #000; */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+}
+
+#copy-btn {
+    font-family: 'Poppins', sans-serif;
+  background-color: #000;
+  color: #fff;
+  font-size: 18px;
+  /* box-shadow: 2px 2px #000; */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  margin-right: 100px;
+}
+
+#generate-pdf-btn {
+  font-family: 'Poppins', sans-serif;
+background-color: #000;
+color: #fff;
+font-size: 18px;
+/* box-shadow: 2px 2px #000; */
+border: none;
+padding: 10px 20px;
+border-radius: 5px;
+cursor: pointer;
+display: block;
+margin: 60px auto;
+margin-left: 20px;
+}
+
+
+#signin-btn {
+    font-family: 'Poppins', sans-serif;
+  background-color: #000;
+  color: #fff;
+  font-size: 20px;
+  /* box-shadow: 2px 2px #000; */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  /* margin: 20px auto; */
+}
+
+
+
+/* Output Box */
+#output-box {
+    font-family: 'Poppins', sans-serif;
+  display: none;
+  margin-top: 50px;
+  text-align: center;
+}
+
+#output {
+    font-family: 'Poppins', sans-serif;
+  width: 80%;
+  height: 300px;
+  font-size: 24px;
+  margin: 0 auto;
+}
+

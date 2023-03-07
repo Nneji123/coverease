@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CoverEase</title>
+  <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet"
+      href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
+
+  <link rel='stylesheet' id='roboto-subset.css-css'
+      href='https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5'
+      type='text/css' media='all' />
+  <!-- <link rel="stylesheet" href="./static/css/style.css.css" type="text/css" media="all"> -->
+  <link rel="stylesheet" href="./static/css/style.css">
+</head>
+
+<body>
+  <style>
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 100px;
+      font-weight: bold;
+      /* text-shadow: 2px 2px #000; */
+      color: #000;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      color: #000;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      line-height: 2.5;
+
+
+    }
+  </style>
+      <!-- <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black"> -->
+
+      <a class="navbar-brand">
+        <img src="./static/images/transparent-logo.png" alt="CoverEase Logo" height="50px">
+      </a>
+      
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <!-- <h1>CoverEase</h1> -->
+        <p id="text"></p>
+        <button type="submit" class="btn btn-dark d-inline-block" id="signin-btn" style="font-size: 13px;">Click Here to try it out!</button>
+        <!-- <button type="submit" class="btn btn-dark d-inline-block" id="signup-btn" style="margin-left: 10px; font-size: 13px;">Sign up</button> -->
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow">
+          <div class="card-video">
+            <video src="./test.mp4" allowfullscreen autoplay muted loop style="width: 100%; height: 100%;"></video>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <footer id="sticky-footer" class="flex-sm-shrink-0" style="background-color: black">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="text-white" href="https://github.com/Nneji123" target="_blank">© Nneji Ifeanyi</a>
+      <div>
+        <a class="btn btn-white btn-icon btn-floating m-1" href="#!" role="button" target="_blank"><i
+            class="fab fa-twitter fa-2"></i></a>
+        <a class="btn btn-white btn-icon btn-floating m-1" href="#!" role="button" target="_blank"><i
+            class="fab fa-google fa-2"></i></a>
+        <a class="btn btn-white btn-icon btn-floating m-1" href="#!" role="button" target="_blank"><i
+            class="fab fa-linkedin-in fa-2"></i></a>
+        <a class="btn btn-white btn-icon btn-floating m-1" href="#!" role="button" target="_blank"><i
+            class="fab fa-github fa-2"></i></a>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+        </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
+    <script src="./static/js/script.js"></script>
+<script>
+  const text = "Are you tired of spending hours crafting the perfect cover letter for every job application? Look no further than CoverEase - the ultimate solution to your cover letter needs. With our cutting-edge AI technology, you can generate professional-quality cover letters in minutes, without ever having to write a single word yourself."
+  let i = 0;
+
+  const interval = setInterval(() => {
+    if (i >= text.length) {
+      clearInterval(interval);
+      return;
+    }
+
+    const char = text.charAt(i);
+    const div = document.getElementById("text");
+    div.innerHTML += char;
+    i++;
+  }, 20); // Change the value of the delay (in milliseconds) to adjust the speed
+</script>
+
+    </script>
+</body>
+
+</html>
