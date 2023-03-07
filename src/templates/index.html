@@ -275,11 +275,11 @@
       
                   <div class="top-container">
       
-                    <img src="../static/images/profile.png" class="img-fluid profile-image" width="70">
+                    <img src="{{ picture }}" class="img-fluid profile-image" width="70">
       
                     <div class="ml-3">
-                      <h5 class="name" style="margin-left: 40px;">Ifeanyi</h5>
-                      <p class="mail" style="font-size: 13px; margin-left: 40px;">ifeanyinneji777@gmail.com</p>
+                      <h5 class="name" style="margin-left: 40px;">{{username}}</h5>
+                      <p class="mail" style="font-size: 13px; margin-left: 40px;">{{email}}</p>
                     </div>
                   </div>
       
@@ -451,31 +451,26 @@
         <p class="lead text-center">Streamline Your Job Search with CoverEase: The Hassle-Free Cover Letter Generator!
         </p>
         <!-- Form -->
-        <form>
-            <div class="form-group">
-                <label for="job-description" class="form-label">Job Title:</label>
-                <select class="form-select" id="job-description">
-                    <option value="" disabled selected>Select a job title</option>
-                    <option value="Web Developer">Web Developer</option>
-                    <option value="Graphic Designer">Graphic Designer</option>
-                    <option value="Marketing Manager">Marketing Manager</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="company-name" class="form-label">Company Name:</label>
-                <select class="form-select" id="company-name">
-                    <option value="" disabled selected>Select a company name</option>
-                    <option value="Google">Google</option>
-                    <option value="Facebook">Facebook</option>
-                    <option value="Amazon">Amazon</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="your-name" class="form-label">Your Name:</label>
-                <input type="text" class="form-control" id="your-name" placeholder="Enter your name">
-            </div>
-            <button type="button" class="btn btn-dark" id="generate-btn" style="margin-bottom: 100px;">Generate Cover
-                Letter</button>
+        <form method="POST" action="{{ url_for('home.generate') }}">
+          <div class="form-group">
+              <label for="job-description" class="form-label">Job Title:</label>
+              <input class="form-select" id="job-description" type="text" name="job_description">
+          </div>
+          <div class="form-group">
+              <label for="company-name" class="form-label">Company Name:</label>
+              <input type="text" class="form-control" id="company-name" name="company_name" placeholder="Enter company name">
+          </div>
+          <div class="form-group">
+              <label for="your-name" class="form-label">Your Name:</label>
+              <input type="text" class="form-control" id="your-name" name="name" placeholder="Enter your name">
+          </div>
+          <div class="form-group">
+              <label for="skills" class="form-label">Skills:</label>
+              <input type="text" class="form-control" id="skills" name="skills" placeholder="Enter skills separated by commas">
+          </div>
+          <button type="submit" class="btn btn-dark" style="margin-bottom: 100px;">Generate Cover Letter</button>
+      </form>
+      
     </div>
     <!-- Generated letter card -->
     <div id="generated-letter-card" style="display:none;">

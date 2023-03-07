@@ -36,7 +36,7 @@ body {
                 </div>
                 <p class="lead text-center mb-4">Sign in to CoverEase!</p>
                 <!-- Login Form -->
-                <form action="/login" method="post">
+                <form action="/logins" method="post">
                     <div class="form-group row mb-3">
                         <div class="row justify-content-center mb-4">
                             <div class="col-md-3 text-center">
@@ -53,16 +53,16 @@ body {
                     </div>
                     <div class="form-group row mb-3">
                         <div class="col-md-8 mx-auto">
-                            <input type="email" class="form-control" id="email" placeholder="Email" style="width: 100%">
+                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" style="width: 100%">
                         </div>
                     </div>
                     <div class="form-group row mb-3">
                         <div class="col-md-8 mx-auto">
-                            <input type="password" class="form-control" id="password" placeholder="Password" style="width: 100%">
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="password" style="width: 100%">
                         </div>
                     </div>
                     <div class="d-grid gap-2">
-                        <a href="/login"  type="button" class="btn btn-dark" id="signin-btn" style="margin-bottom: 20px; font-size: 13px;">Sign in</a>
+                        <button  type="submit" class="btn btn-dark" id="signin-btn" style="margin-bottom: 20px; font-size: 13px;">Sign in</a>
                     </div>
                     <div class="row mt-3">
                         <div class="col text-start">

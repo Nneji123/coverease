@@ -19,7 +19,6 @@ class GoogleUser(db.Model, UserMixin):
     picture = db.Column(db.String)
     
     google_letters = db.relationship('Letter', backref='googleuser_letters', lazy=True)
-    # user_id = db.Column(db.String(36), db.ForeignKey('user.id'), nullable=False)
 
 class GithubUser(db.Model, UserMixin):
     id = db.Column(db.String(36), primary_key=True, default=str(uuid.uuid4()))
@@ -28,11 +27,13 @@ class GithubUser(db.Model, UserMixin):
     picture = db.Column(db.String)
     
     github_letters = db.relationship('Letter', backref='githubuser_letters', lazy=True, overlaps="githubuser_letters")
-    # user_id = db.Column(db.String(36), db.ForeignKey('user.id'), nullable=False)
 
 class Letter(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
+    skills = db.Column(db.Text)
+    company_name = db.Column(db.Text)
+    job_description = db.Column(db.Text)
     
     user_id = db.Column(db.String(36), db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref='user_letters', lazy=True)

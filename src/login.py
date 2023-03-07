@@ -1,8 +1,7 @@
-import os
-from flask import Flask, redirect, url_for, render_template, request, flash, Blueprint
-from flask_login import login_user, logout_user, login_required, LoginManager
+from flask import redirect, url_for, render_template, request, flash, Blueprint
+from flask_login import login_user, LoginManager
 from werkzeug.security import check_password_hash
-from models import db, User
+from models import User
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,7 +14,7 @@ login_manager.init_app(login)
 
 
 
-@login.route("/login", methods=["GET", "POST"])
+@login.route("/logins", methods=["GET", "POST"])
 def show():
     if request.method == "POST":
         email = request.form["email"]
@@ -23,15 +22,11 @@ def show():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                if user.is_admin:
-                    login_user(user, remember=True)
-                    return redirect(url_for("admin.show"))
-                else:
-                    login_user(user)
-                    next_page = request.args.get('next')
-                    flash("You are logged in.")
-                    print("You are logged in!")
-                    return redirect(next_page) if next_page else redirect(url_for('home.show'))
+                login_user(user)
+                flash("You are logged in.")
+                print("You are logged in!")
+                picture="./static/images/profile_icon.png"
+                return render_template("index.html", username=user.username, email=email, picture=picture)
             else:
                 flash("Incorrect password. Please try again.")
                 return redirect(url_for("login.show") + "?error=incorrect-password")

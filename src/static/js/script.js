@@ -13,7 +13,7 @@
             // }
 
             // Generate cover letter based on job description, company name, and your name
-            const coverLetter = `Dear Hiring Manager,\n\nI am writing to express my interest in the ${jobDescription} position at ${companyName}. As a ${yourName}, I believe I would be an excellent candidate for this role.\n\nThank you for considering my application. I look forward to hearing from you soon.\n\nSincerely,\nYour Name`;
+            const coverLetter = "{{cover_letter}}";
 
             // Show generated cover letter card
             const card = document.createElement("div");

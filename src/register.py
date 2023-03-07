@@ -31,31 +31,32 @@ def show():
         if username and email and password and confirm_password:
             if password == confirm_password:
                 hashed_password = generate_password_hash(password, method="sha256")
-                user = bool(User.query.filter_by(email=email).first())
-                if user == False:
-                    try:
-                        new_user = User(
+                try:
+                    new_user = User(
                             username=username,
                             email=email,
                             password=hashed_password,
                         )
-                        db.session.add(new_user)
-                        db.session.commit()
-                        flash("You have successfully registered!", "success")
-                        return redirect(url_for("login.show") + "?success=account-created")
-                    except sqlalchemy.exc.IntegrityError:
-                        db.session.rollback()
-                        flash("User already exists!", "failure")
-                        return redirect(
-                            url_for("register.show") + "?error=user-or-email-exists"
-                        )
-                    finally:
-                        db.session.close()
-                elif user:
-                    flash("User already exists!", "failure")
-                    return redirect(url_for("register.show") + "?error=user-or-email-exists")
+                    picture = "./static/images/profile_icon.png"
+                    db.session.add(new_user)
+                    db.session.commit()
+                    flash("You have successfully registered!", "success")
+                    return render_template("index.html", username=username, email=email, picture=picture)
+                except sqlalchemy.exc.IntegrityError:
+                    db.session.rollback()
+                    flash("User already exists!", "danger")
+                    return redirect(
+                        url_for("register.show") + "?error=user-or-email-exists"
+                    )
+                finally:
+                    db.session.close()
+            else:
+                flash("Passwords do not match!")
+                return redirect(
+                        url_for("register.show") + "?error=passwords-do-not-match"
+                    )
         else:
-            flash("Please fill in all fields!", "failure")
+            flash("Please fill in all fields!", "danger")
             return redirect(url_for("register.show") + "?error=missing-fields")
     else:
         return render_template("register.html")

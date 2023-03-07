@@ -26,14 +26,14 @@ def signin_google():
         user = GoogleUser.query.filter_by(email=email).first()
         if user:
             login_user(user)
-            return redirect(url_for('home.show'))
+            return render_template("index.html", username=username, picture=picture, email=email)
         else:
             try:
                 new_user = GoogleUser(username=username, email=email, picture=picture)
                 db.session.add(new_user)
                 db.session.commit()
                 login_user(new_user)
-                return redirect(url_for('home.show'))
+                return render_template("index.html", username=username, picture=picture, email=email)
             except sqlalchemy.exc.IntegrityError as e:
                 db.session.rollback()
                 print(e)

@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, url_for, flash
+from flask import Flask, redirect, url_for, flash, render_template
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_dance.contrib.github import make_github_blueprint, github
 from dotenv import load_dotenv
@@ -24,14 +24,14 @@ def index():
     user = GithubUser.query.filter_by(email=email).first()
     if user:
         login_user(user)
-        return redirect(url_for('home.show'))
+        return render_template("index.html", username=username, picture=picture, email=email)
     else:
         try:
             new_user = GithubUser(username=username, email=email, picture=picture)
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
-            return redirect(url_for('home.show'))
+            return render_template("index.html", username=username, picture=picture, email=email)
         except sqlalchemy.exc.IntegrityError as e:
             db.session.rollback()
             print(e)

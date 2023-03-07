@@ -13,12 +13,39 @@
     <link rel='stylesheet' id='roboto-subset.css-css'
         href='https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5'
         type='text/css' media='all' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="./static/css/style.css" type="text/css" media="all">
     <!-- Custom CSS -->
 
 </head>
 
 <body>
+    
+        <!-- Flash message alert modal -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+            <div class="modal fade" id="flash-modal" tabindex="-1" role="dialog" aria-labelledby="flash-modal-label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                      <h5 class="modal-title" id="flash-modal-label">{{ category }}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      {{ message }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+
+
 <!-- Main content -->
 <div class="container my-5 custom-container-login">
     <div class="card text-light" style="margin-bottom: 80px;">
@@ -74,4 +101,16 @@
     </div>
 </div>
 </body>
+<script>
+// Show flash message modal if it exists
+document.addEventListener('DOMContentLoaded', function() {
+  var messages = JSON.parse('{{ get_flashed_messages(with_categories=true)|tojson|safe }}');
+  console.log(messages);
+  if (messages) {
+    var modal = document.querySelector('#flash-modal');
+    modal.style.display = 'block';
+    modal.classList.add('show');
+  }
+});
+</script>
 </html>
