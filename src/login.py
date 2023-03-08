@@ -1,8 +1,10 @@
-from flask import redirect, url_for, render_template, request, flash, Blueprint
+from flask import redirect, url_for, render_template, request, flash, Blueprint, session
 from flask_login import login_user, LoginManager
 from werkzeug.security import check_password_hash
 from models import User
 from dotenv import load_dotenv
+
+from utils import get_num_letters_for_user
 
 load_dotenv()
 
@@ -26,7 +28,10 @@ def show():
                 flash("You are logged in.")
                 print("You are logged in!")
                 picture="./static/images/profile_icon.png"
-                return render_template("index.html", username=user.username, email=email, picture=picture)
+                session["picture"] = picture
+                session["email"] = email
+                session["username"] = user.username
+                return redirect(url_for("home.show"))
             else:
                 flash("Incorrect password. Please try again.")
                 return redirect(url_for("login.show") + "?error=incorrect-password")

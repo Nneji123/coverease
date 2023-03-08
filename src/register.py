@@ -41,7 +41,7 @@ def show():
                     db.session.add(new_user)
                     db.session.commit()
                     flash("You have successfully registered!", "success")
-                    return render_template("index.html", username=username, email=email, picture=picture)
+                    return redirect(url_for("home.show"))
                 except sqlalchemy.exc.IntegrityError:
                     db.session.rollback()
                     flash("User already exists!", "danger")

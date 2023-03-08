@@ -29,9 +29,9 @@
 
 .custom-container {
     width: 40%;
-    margin: -100px auto;
+    /* margin: -100px auto;
     text-align: justify;
-    padding-top: 80px;
+    padding-top: 80px; */
   }
 
   .custom-container-login {
@@ -203,7 +203,7 @@ margin-left: 20px;
 #output {
     font-family: 'Poppins', sans-serif;
   width: 80%;
-  height: 300px;
+  height: 700px;
   font-size: 24px;
   margin: 0 auto;
 }

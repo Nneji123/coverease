@@ -2,241 +2,271 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoverEase</title>
-    <!-- Bootstrap CSS -->
-    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoverEase</title>
+  <!-- Bootstrap CSS -->
+  <link rel="icon" href= "{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-        href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link rel="stylesheet"
+    href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
 
-    <link rel='stylesheet' id='roboto-subset.css-css'
-        href='https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5'
-        type='text/css' media='all' />
-    <link rel="stylesheet" href="../static/css/style.css" type="text/css" media="all">
-    <!-- Custom CSS -->
+  <link rel='stylesheet' id='roboto-subset.css-css'
+    href='https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5'
+    type='text/css' media='all' />
+  <link rel="stylesheet" href="../static/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  
+  <!-- Custom CSS -->
 </head>
 
 <style>
-    /* The sidebar menu */
-    .sidebar {
-        height: 100%;
-        /* 100% Full-height */
-        width: 0;
-        /* 0 width - change this with JavaScript */
-        position: fixed;
-        /* Stay in place */
-        z-index: 1;
-        /* Stay on top */
-        top: 0;
-        left: 0;
-        background-color: #000000;
-        /* Black*/
-        overflow-x: hidden;
-        /* Disable horizontal scroll */
-        padding-top: 60px;
-        /* Place content 60px from the top */
-        transition: 0.5s;
-        /* 0.5 second transition effect to slide in the sidebar */
-    }
+  .card-height {
+    height: 700px;
+    margin-bottom: 300px;
+  }
 
-    /* The sidebar links */
-    .sidebar a {
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #ffffff;
-        display: block;
-        transition: 0.3s;
-    }
+  /* The sidebar menu */
+  .sidebar {
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 60px;
+    /* Place content 60px from the top */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidebar */
+  }
 
-    /* When you mouse over the navigation links, change their color */
-    .sidebar a:hover {
-        color: #f1f1f1;
-    }
+  /* The sidebar links */
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+  }
 
-    /* Position and style the close button (top right corner) */
-    .sidebar .closebtn {
-        position: absolute;
-        top: 0;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
-    }
+  /* When you mouse over the navigation links, change their color */
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
 
-    /* The button used to open the sidebar */
-    .openbtn {
-        font-size: 20px;
-        cursor: pointer;
-        background-color: #000000;
-        color: white;
-        padding: 10px 15px;
-        border: none;
-    }
+  /* Position and style the close button (top right corner) */
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
 
-    .openbtn:hover {
-        background-color: #000000;
-    }
+  /* The button used to open the sidebar */
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #000000;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+  }
 
-    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-    #main {
+  .openbtn:hover {
+    background-color: #000000;
+  }
+
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    transition: margin-left .5s; /* If you want a transition effect */
+    transition: margin-left .5s;
+    /* If you want a transition effect */
     padding: 20px;
     z-index: 9999;
     /* margin-left: -25px; */
+  }
+
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {
+      padding-top: 15px;
     }
 
-    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-    @media screen and (max-height: 450px) {
-        .sidebar {
-            padding-top: 15px;
-        }
-
-        .sidebar a {
-            font-size: 18px;
-        }
+    .sidebar a {
+      font-size: 18px;
     }
+  }
 </style>
 
 <style>
-.card{
-	background-color: #fff;
-	width: 400px;
-	height: 500px;
-	border-radius: 33px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	padding: 2rem !important;
-}
-.top-container{
-	display: flex;
-	align-items: center;
-}
-.profile-image{
-	border-radius: 10px;
-	border: 2px solid #000000;
-}
-.name{
-	font-size: 15px;
-	font-weight: bold;
-	color: #000000;
-	position: relative;
-	top: 8px;
-}
-.mail{
-	font-size: 14px;
-	color: grey;
-	position: relative;
-	top: 2px;
-}
-.middle-container{
-	background-color: #eee;
-	border-radius: 12px;
+  .card {
+    background-color: #fff;
+    width: 400px;
+    height: 500px;
+    border-radius: 33px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 2rem !important;
+  }
 
-}
-.middle-container:hover {
-	border: 1px solid #000000;
-}
-.dollar-div{
-	background-color: #000000;
-	padding: 12px;
-	border-radius: 10px;
-}
-.round-div{
-	border-radius: 50%;
-	width: 35px;
-	height: 35px;
-	background-color: #fff;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-}
-.dollar{
-	font-size: 16px !important;
-	color: #000000 !important;
-	font-weight: bold !important;
-}
+  .top-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-image {
+    border-radius: 10px;
+    border: 2px solid #000000;
+  }
+
+  .name {
+    font-size: 15px;
+    font-weight: bold;
+    color: #000000;
+    position: relative;
+    top: 8px;
+  }
+
+  .mail {
+    font-size: 14px;
+    color: grey;
+    position: relative;
+    top: 2px;
+  }
+
+  .middle-container {
+    background-color: #eee;
+    border-radius: 12px;
+
+  }
+
+  .middle-container:hover {
+    border: 1px solid #000000;
+  }
+
+  .dollar-div {
+    background-color: #000000;
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .round-div {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .dollar {
+    font-size: 16px !important;
+    color: #000000 !important;
+    font-weight: bold !important;
+  }
 
 
-.current-balance{
-	font-size: 15px;
-	color: #272727;
-	font-weight: bold;
-}
-.amount{
-	color: #000000;
-	font-size: 16px;
-	font-weight: bold;
-}
-.dollar-sign{
-	font-size: 16px;
-	color: #000000;
-	font-weight: bold;
-}
+  .current-balance {
+    font-size: 15px;
+    color: #272727;
+    font-weight: bold;
+  }
 
-.recent-border{
-	border-left: 2px solid #000000;
-	display: flex;
-	align-items: center;
+  .amount {
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+  }
 
-}
-.recent-border:hover {
-	border-bottom: 1px solid #dee2e6!important;
-}
+  .dollar-sign {
+    font-size: 16px;
+    color: #000000;
+    font-weight: bold;
+  }
 
-.recent-orders{
-	font-size: 16px;
-	font-weight: 700;
-	color: #000000;
-	margin-left: 2px;
-}
+  .recent-border {
+    border-left: 2px solid #000000;
+    display: flex;
+    align-items: center;
 
-.wishlist{
-	font-size: 16px;
-	font-weight: 700;
-	color: #272727;
+  }
 
-}
-.wishlist-border:hover{
-	border-bottom: 1px solid #dee2e6!important;
-}
-.fashion-studio{
-	font-size: 16px;
-	font-weight: 700;
-	color: #272727;
-}
-.fashion-studio-border:hover {
-	border-bottom: 1px solid #dee2e6!important;
-}
+  .recent-border:hover {
+    border-bottom: 1px solid #dee2e6 !important;
+  }
 
-#modal-btn {
-  font-family: 'Poppins', sans-serif;
-  background-color: #000;
-  color: #fff;
-  font-size: 13px; /* Adjust font size */
-  /* box-shadow: 2px 2px #000; */
-  border: none;
-  padding: 8px 16px; /* Adjust padding */
-  border-radius: 5px;
-  cursor: pointer;
-  display: inline-block; /* Change display to inline-block */
-  margin-right: 10px;  /* Add margin between buttons */
-  margin-top: 60px;
-}
+  .recent-orders {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    margin-left: 2px;
+  }
 
-#modal-btn:last-child {
-  margin-right: 0; /* Remove margin from last button */
-}
+  .wishlist {
+    font-size: 16px;
+    font-weight: 700;
+    color: #272727;
 
-.form-group-modal input {
+  }
+
+  .wishlist-border:hover {
+    border-bottom: 1px solid #dee2e6 !important;
+  }
+
+  .fashion-studio {
+    font-size: 16px;
+    font-weight: 700;
+    color: #272727;
+  }
+
+  .fashion-studio-border:hover {
+    border-bottom: 1px solid #dee2e6 !important;
+  }
+
+  #modal-btn {
+    font-family: 'Poppins', sans-serif;
+    background-color: #000;
+    color: #fff;
+    font-size: 13px;
+    /* Adjust font size */
+    /* box-shadow: 2px 2px #000; */
+    border: none;
+    padding: 8px 16px;
+    /* Adjust padding */
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    /* Change display to inline-block */
+    margin-right: 10px;
+    /* Add margin between buttons */
+    margin-top: 60px;
+  }
+
+  #modal-btn:last-child {
+    margin-right: 0;
+    /* Remove margin from last button */
+  }
+
+  .form-group-modal input {
     font-family: 'Poppins', sans-serif;
     display: inline-block;
     width: 450px;
@@ -251,296 +281,412 @@
 </style>
 
 <body>
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Home</a>
-        <a href="#" data-toggle="modal" data-target="#historyModal">History</a>
-        <a href="#" data-toggle="modal" data-target="#profile-modal">Profile</a>
-        <a href="/logout" style="margin-top: 290px;">Logout</a>
-        <!-- <a href="#">Contact</a> -->
-    </div>
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">Home</a>
+    <a href="#" data-toggle="modal" data-target="#historyModal">History</a>
+    <a href="#" data-toggle="modal" data-target="#profile-modal">Profile</a>
+    <a href="/logout" style="margin-top: 290px;">Logout</a>
+    <!-- <a href="#">Contact</a> -->
+  </div>
 
-    <div id="main">
-        <button class="openbtn" onclick="openNav()">&#9776;</button>
-    </div>
+  <div id="main">
+    <button class="openbtn" onclick="openNav()">&#9776;</button>
+  </div>
 
-    <!-- Profile Modal -->
-    <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content" style="background: transparent;">
-            <div class="modal-body">
-              <div class="container d-flex justify-content-center mt-5">
-      
-                <div class="card">
-      
-                  <div class="top-container">
-      
-                    <img src="{{ picture }}" class="img-fluid profile-image" width="70">
-      
-                    <div class="ml-3">
-                      <h5 class="name" style="margin-left: 40px;">{{username}}</h5>
-                      <p class="mail" style="font-size: 13px; margin-left: 40px;">{{email}}</p>
-                    </div>
-                  </div>
-      
-                  <div class="middle-container d-flex justify-content-between align-items-center mt-3 p-2">
-                    <div class="dollar-div px-3">
-      
-                        <div class="round-div">
-                            <img src="../static/images/pen.png" class="dollar" width="32" height="32" alt="pen">
-                          </div>
-      
-                    </div>
-                    <div class="d-flex flex-column text-right mr-2">
-                      <span class="current-balance">Letters Generated</span>
-                      <span class="amount">25</span>
-                    </div>
-      
-                  </div>
-      
-                  <div class="recent-border mt-4">
-                    <span class="recent-orders">Recent Cover Letters</span>
-                  </div>
-                  <div class="wishlist-border pt-2">
-                    <span class="wishlist">Cover 1</span>
-                  </div>
-                  <div class="fashion-studio-border pt-2">
-                    <span class="fashion-studio">Cover 2</span>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                    <button type="button"  id="modal-btn" data-dismiss="modal">Close</button>
-                    <button type="button"  id="modal-btn">Delete Account</button>
-                    <button type="button"  id="modal-btn">Change Password</button>
-                  </div>
+  <!-- Profile Modal -->
+  <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" style="background: transparent;">
+        <div class="modal-body">
+          <div class="container d-flex justify-content-center mt-5">
+
+            <div class="card">
+
+              <div class="top-container">
+
+                <img src="{{ session['picture'] }}" class="img-fluid profile-image" width="70">
+
+                <div class="ml-3">
+                  <h5 class="name" style="margin-left: 40px;">{{session['username']}}</h5>
+                  <p class="mail" style="font-size: 13px; margin-left: 40px;">{{ session['email'] }}</p>
                 </div>
+              </div>
+
+              <div class="middle-container d-flex justify-content-between align-items-center mt-3 p-2">
+                <div class="dollar-div px-3">
+
+                  <div class="round-div">
+                    <img src="../static/images/pen.png" class="dollar" width="32" height="32" alt="pen">
+                  </div>
+
                 </div>
-      
+                <div class="d-flex flex-column text-right mr-2">
+                  <span class="current-balance">Letters Generated</span>
+                  <span class="amount">{{number_letter}}</span>
+                </div>
+
+              </div>
+
+              <div class="recent-border mt-4">
+                <span class="recent-orders">Recent Cover Letters</span>
+              </div>
+              <div class="wishlist-border pt-2">
+                <span class="wishlist">Application for {{job_descriptions[0]}} Role</span>
+              </div>
+              <div class="fashion-studio-border pt-2">
+                <span class="fashion-studio">Application for {{job_descriptions[1]}} Role</span>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button type="button" id="modal-btn" data-dismiss="modal">Close</button>
+                <button type="button" id="modal-btn">Delete Account</button>
+                <button type="button" id="modal-btn">Change Password</button>
               </div>
             </div>
           </div>
+
         </div>
       </div>
+    </div>
+  </div>
+  </div>
 
 
-      <!-- History Modal -->
-      <div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="historyModalLabel">Cover Letter History</h5>
-            </div>
-            <div class="modal-body">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Company Name</th>
-                    <th scope="col">Job Description</th>
-                    <th scope="col">Skills</th>
-                    <th scope="col">View Cover Letter</th>
-                    <th scope="col">Generate PDF</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Acme Inc.</td>
-                    <td>Software Engineer</td>
-                    <td>Java, Python, SQL</td>
-                    <td><button type="button" id="modal-btn" style="margin-top: 0px;">View</button></td>
-                    <td><button type="button" id="modal-btn" style="margin-top: 0px;">Generate PDF</button></td>
-                  </tr>
-                  <tr>
-                    <td>Globex Corp.</td>
-                    <td>Data Analyst</td>
-                    <td>R, Excel, SQL</td>
-                    <td><button type="button" id="modal-btn" style="margin-top: 0px;">View</button></td>
-                    <td><button type="button" id="modal-btn" style="margin-top: 0px;">Generate PDF</button></td>
-                  </tr>
-                  <tr>
-                    <td>Stark Industries</td>
-                    <td>Software Developer</td>
-                    <td>C++, Python, Linux</td>
-                    <td><button type="button" id="modal-btn" style="margin-top: 0px;">View</button></td>
-                    <td><button type="button" id="modal-btn" style="margin-top: 0px;">Generate PDF</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <button type="button" id="modal-btn" data-dismiss="modal">Close</button>
-            </div>
-          </div>
+  <!-- History Modal -->
+  <div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="historyModalLabel">Cover Letter History</h5>
+        </div>
+        <div id="history-table" class="modal-body">
+          <table  class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Company Name</th>
+                <th scope="col">Job Description</th>
+                <th scope="col">Skills</th>
+                <th scope="col">View Cover Letter</th>
+                <th scope="col">Generate PDF</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for letter in letters %}
+                <tr>
+                  <td>{{ letter.company_name }}</td>
+                  <td>{{ letter.job_description }}</td>
+                  <td>{{ letter.skills }}</td>
+                  <td><button type="button" onclick="viewLetter('{{ letter.content | replace('\n', '<br>') }}')" style="margin-top: 0px;" id="modal-btn">View</button></td>
+                  <td><button type="button" id="modal-btn" style="margin-top: 0px;">Generate PDF</button></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>          
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="modal-btn" data-dismiss="modal">Close</button>
         </div>
       </div>
+    </div>
+  </div>
 
-    <!-- Generate PDF Modal -->
-    <div class="modal fade" id="pdf-modal" tabindex="-1" role="dialog" aria-labelledby="pdf-modal-label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="pdf-modal-label">Generate PDF</h5>
-                </div>
-                <div class="modal-body">
-                    <p style="font-size: 13px;">Fill in the details to generate a Cover Letter PDF.</p>
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group-modal col-md-6">
-                                <input type="text" class="form-control" id="your-name" placeholder="Your Name">
-                            </div>
-                            <div class="form-group-modal col-md-6">
-                                <input type="text" class="form-control" id="your-address" placeholder="Your Address">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group-modal col-md-6">
-                                <input type="text" class="form-control" id="your-city-state-zip" placeholder="Your City, State ZIP Code">
-                            </div>
-                            <div class="form-group-modal col-md-6">
-                                <input type="tel" class="form-control" id="your-phone-number" placeholder="Your Phone Number">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group-modal col-md-6">
-                                <input type="email" class="form-control" id="your-email-address" placeholder="Your Email Address">
-                            </div>
-                            <div class="form-group-modal col-md-6">
-                                <input type="date" class="form-control" id="date" placeholder="Date">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group-modal col-md-6">
-                                <input type="text" class="form-control" id="recipient-name" placeholder="Recipient Name">
-                            </div>
-                            <div class="form-group-modal col-md-6">
-                                <input type="text" class="form-control" id="recipient-title" placeholder="Recipient Title">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group-modal col-md-6">
-                                <input type="text" class="form-control" id="organization-name" placeholder="Organization Name">
-                            </div>
-                            <div class="form-group-modal col-md-6">
-                                <input type="text" class="form-control" id="organization-address" placeholder="Organization Address">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group-modal col-md-6">
-                                <input type="text" class="form-control" id="organization-city-state-zip" placeholder="Organization City, State ZIP Code">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="modal-btn" data-dismiss="modal" style="margin-top: 0px;">Close</button>
-                    <button type="button" id="modal-btn" style="margin-top: 0px;">Download PDF</button>
-                </div>
+
+  <!-- Letter Modal -->
+  <div class="modal fade" id="letterModal" tabindex="-1" role="dialog" aria-labelledby="letterModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="letterModalLabel">Cover Letter Modla</h5>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="modal-btn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Generate PDF Modal -->
+  <div class="modal fade" id="pdf-modal" tabindex="-1" role="dialog" aria-labelledby="pdf-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="pdf-modal-label">Generate PDF</h5>
+        </div>
+        <div class="modal-body">
+          <p style="font-size: 13px;">Fill in the details to generate a Cover Letter PDF.</p>
+          <form>
+            <div class="form-row">
+              <div class="form-group-modal col-md-6">
+                <input type="text" class="form-control" id="your-name" placeholder="Your Name">
+              </div>
+              <div class="form-group-modal col-md-6">
+                <input type="text" class="form-control" id="your-address" placeholder="Your Address">
+              </div>
             </div>
-        </div>
-    </div>
-
-  
-
-      
-      
-
-    <!-- Main content -->
-    <!-- <div id="page-content-wrapper"> -->
-    <div class="container custom-container">
-        <div class="text-center">
-            <img src="../static/images/transparent-logo.png" alt="CoverEase Logo" height="200px">
-        </div>
-        <p class="lead text-center">Streamline Your Job Search with CoverEase: The Hassle-Free Cover Letter Generator!
-        </p>
-        <!-- Form -->
-        <form method="POST" action="{{ url_for('home.generate') }}">
-          <div class="form-group">
-              <label for="job-description" class="form-label">Job Title:</label>
-              <input class="form-select" id="job-description" type="text" name="job_description">
-          </div>
-          <div class="form-group">
-              <label for="company-name" class="form-label">Company Name:</label>
-              <input type="text" class="form-control" id="company-name" name="company_name" placeholder="Enter company name">
-          </div>
-          <div class="form-group">
-              <label for="your-name" class="form-label">Your Name:</label>
-              <input type="text" class="form-control" id="your-name" name="name" placeholder="Enter your name">
-          </div>
-          <div class="form-group">
-              <label for="skills" class="form-label">Skills:</label>
-              <input type="text" class="form-control" id="skills" name="skills" placeholder="Enter skills separated by commas">
-          </div>
-          <button type="submit" class="btn btn-dark" style="margin-bottom: 100px;">Generate Cover Letter</button>
-      </form>
-      
-    </div>
-    <!-- Generated letter card -->
-    <div id="generated-letter-card" style="display:none;">
-        <!-- <div class="card-header" style="font-size: 20px;">Generated Cover Letter</div> -->
-        <div class="card-body" style=" margin-bottom: 300px; margin-top: 100px;">
-            <p id="generated-letter" style="font-size: 10px;"></p>
-            <div class="d-flex justify-content-between align-items-center">
-                <button type="button" class="btn btn-dark mr-5" id="copy-btn">Copy to clipboard</button>
-                <button type="button" class="btn btn-dark ml-5" id="generate-pdf-btn" data-toggle="modal" data-target="#pdf-modal">Generate PDF</button>
+            <div class="form-row">
+              <div class="form-group-modal col-md-6">
+                <input type="text" class="form-control" id="your-city-state-zip"
+                  placeholder="Your City, State ZIP Code">
+              </div>
+              <div class="form-group-modal col-md-6">
+                <input type="tel" class="form-control" id="your-phone-number" placeholder="Your Phone Number">
+              </div>
             </div>
+            <div class="form-row">
+              <div class="form-group-modal col-md-6">
+                <input type="email" class="form-control" id="your-email-address" placeholder="Your Email Address">
+              </div>
+              <div class="form-group-modal col-md-6">
+                <input type="date" class="form-control" id="date" placeholder="Date">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group-modal col-md-6">
+                <input type="text" class="form-control" id="recipient-name" placeholder="Recipient Name">
+              </div>
+              <div class="form-group-modal col-md-6">
+                <input type="text" class="form-control" id="recipient-title" placeholder="Recipient Title">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group-modal col-md-6">
+                <input type="text" class="form-control" id="organization-name" placeholder="Organization Name">
+              </div>
+              <div class="form-group-modal col-md-6">
+                <input type="text" class="form-control" id="organization-address" placeholder="Organization Address">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group-modal col-md-6">
+                <input type="text" class="form-control" id="organization-city-state-zip"
+                  placeholder="Organization City, State ZIP Code">
+              </div>
+            </div>
+          </form>
         </div>
+        <div class="modal-footer">
+          <button type="button" id="modal-btn" data-dismiss="modal" style="margin-top: 0px;">Close</button>
+          <button type="button" id="modal-btn" style="margin-top: 0px;">Download PDF</button>
+        </div>
+      </div>
     </div>
+  </div>
 
 
+
+
+
+
+  <!-- Main content -->
+  <!-- <div id="page-content-wrapper"> -->
+  <div class="container custom-container">
+    <div class="text-center">
+      <img src="../static/images/transparent-logo.png" alt="CoverEase Logo" height="200px">
+    </div>
+    <p class="lead text-center">Streamline Your Job Search with CoverEase: The Hassle-Free Cover Letter Generator!
+    </p>
+    <!-- Form -->
+    <form id="cover-letter-form">
+      <div class="form-group">
+        <label for="job-description" class="form-label">Job Title:</label>
+        <input class="form-select" id="job-description" type="text" name="job_description" required>
+      </div>
+      <div class="form-group">
+        <label for="company-name" class="form-label">Company Name:</label>
+        <input type="text" class="form-control" id="company-name" name="company_name" placeholder="Enter company name"
+          required>
+      </div>
+      <div class="form-group">
+        <label for="your-name" class="form-label">Your Name:</label>
+        <input type="text" class="form-control" id="your-name" name="name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="skills" class="form-label">Skills:</label>
+        <input type="text" class="form-control" id="skills" name="skills" placeholder="Enter skills separated by commas"
+          required>
+      </div>
+      <button type="submit" id="generate-btn" class="btn btn-dark" style="margin-bottom: 100px;">Generate Cover
+        Letter</button>
     </form>
-    <footer id="sticky-footer" class="flex-sm-shrink-0" style="background-color: black">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a class="text-white" href="https://github.com/Nneji123">© Nneji Ifeanyi</a>
-            <div>
-                <a class="btn btn-white btn-icon btn-floating m-1" href="#!" role="button"><i
-                        class="fab fa-twitter fa-2"></i></a>
-                <a class="btn btn-white btn-icon btn-floating m-1" href="#!" role="button"><i
-                        class="fab fa-google fa-2"></i></a>
-                <a class="btn btn-white btn-icon btn-floating m-1" href="#!" role="button"><i
-                        class="fab fa-linkedin-in fa-2"></i></a>
-                <a class="btn btn-white btn-icon btn-floating m-1" href="#!" role="button"><i
-                        class="fab fa-github fa-2"></i></a>
-            </div>
-        </div>
-    </footer>
+
+  </div>
+  <!-- Generated letter card -->
+  <div id="generated-letter-card" style="display:none;">
+    <!-- <div class="card-header" style="font-size: 20px;">Generated Cover Letter</div> -->
+    <div class="card-body" style="height: 900px; margin-bottom: 300px;">
+      <p id="generated-letter" style="font-size: 10px;"></p>
+      <div class="d-flex justify-content-between align-items-center">
+        <button type="button" class="btn btn-dark mr-5" id="copy-btn">Copy to clipboard</button>
+        <button type="button" class="btn btn-dark ml-5" id="generate-pdf-btn" data-toggle="modal"
+          data-target="#pdf-modal">Generate PDF</button>
+      </div>
+    </div>
+  </div>
+
+
+  </form>
+  <footer id="sticky-footer" class="flex-sm-shrink-0" style="background-color: black">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="text-white" href="https://github.com/Nneji123">© Nneji Ifeanyi</a>
+      <div>
+        <a class="btn btn-white btn-icon btn-floating m-1" href="#!" role="button"><i
+            class="fab fa-twitter fa-2"></i></a>
+        <a class="btn btn-white btn-icon btn-floating m-1" href="#!" role="button"><i
+            class="fab fa-google fa-2"></i></a>
+        <a class="btn btn-white btn-icon btn-floating m-1" href="#!" role="button"><i
+            class="fab fa-linkedin-in fa-2"></i></a>
+        <a class="btn btn-white btn-icon btn-floating m-1" href="#!" role="button"><i
+            class="fab fa-github fa-2"></i></a>
+      </div>
+    </div>
+  </footer>
 
 
 
 
-    <!-- Bootstrap JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-        </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script src="../static/js/script.js"></script>
-    <script>
-        /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
-        function openNav() {
-            document.getElementById("mySidebar").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
-        }
-
-        /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "0";
-            document.getElementById("main").style.marginLeft = "0";
-        } 
+  <!-- Bootstrap JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
 
-<script>
-    $(function() {
-      $('a[data-toggle="modal"]').on('click', function(e) {
+  <script>
+    document.getElementById("cover-letter-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      generateCoverLetter();
+    });
+
+    function generateCoverLetter() {
+      const form = new FormData(document.getElementById("cover-letter-form"));
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/generate", true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            console.log(response)
+            displayCoverLetter(response.cover_letter);
+          } else {
+            console.log(xhr.responseText);
+          }
+        }
+      };
+      xhr.send(form);
+    }
+
+    function displayCoverLetter(coverLetter) {
+      const card = document.createElement("div");
+      card.classList.add("card", "my-3", "w-50", "mx-auto", "card-height");
+
+      card.style.overflowY = "scroll";
+
+      const cardBody = document.createElement("div");
+      cardBody.classList.add("card-body", "text-center");
+      // cardBody.style.height = "100%";
+      card.appendChild(cardBody);
+      const cardTitle = document.createElement("h5");
+      cardTitle.classList.add("card-title", "fw-bold", "mb-4");
+      // cardTitle.textContent = "Generated Cover Letter";
+      cardBody.appendChild(cardTitle);
+      const cardText = document.createElement("p");
+      cardText.classList.add("card-text");
+      cardText.style.fontSize = "16px";
+      cardText.style.textAlign = "left";
+      cardText.textContent = "";
+
+      // Buttons
+      const copyBtn = document.createElement("button");
+      copyBtn.classList.add("btn", "btn-dark", "mr-5");
+      copyBtn.setAttribute("id", "copy-btn");
+      copyBtn.textContent = "Copy to clipboard";
+
+      copyBtn.addEventListener("click", function () {
+        const textToCopy = cardText.innerText;
+        navigator.clipboard.writeText(textToCopy)
+          .then(() => {
+            alert("Copied to clipboard!");
+          })
+          .catch((err) => {
+            console.error("Failed to copy: ", err);
+          });
+      });
+
+      const generatePdfBtn = document.createElement("button");
+      generatePdfBtn.classList.add("btn", "btn-dark", "ml-5");
+      generatePdfBtn.setAttribute("id", "generate-pdf-btn");
+      generatePdfBtn.setAttribute("data-toggle", "modal");
+      generatePdfBtn.setAttribute("data-target", "#pdf-modal");
+      generatePdfBtn.textContent = "Generate PDF";
+
+      const buttonWrapper = document.createElement("div");
+      buttonWrapper.classList.add("d-flex", "justify-content-between", "align-items-center");
+      buttonWrapper.appendChild(copyBtn);
+      buttonWrapper.appendChild(generatePdfBtn);
+      buttonWrapper.style.marginBottom="200px";
+
+      cardBody.appendChild(cardText);
+
+      // append the card to the generated-letter-card div
+      const generatedLetterCard = document.getElementById("generated-letter-card");
+      generatedLetterCard.innerHTML = '';
+      generatedLetterCard.appendChild(card);
+      generatedLetterCard.appendChild(buttonWrapper);
+      generatedLetterCard.style.display = "block";
+
+      // Render cover letter text one letter at a time
+      let i = 0;
+      const timer = setInterval(function () {
+        if (i < coverLetter.length) {
+          cardText.innerText = coverLetter.substring(0, i + 1);
+          i++;
+        } else {
+          clearInterval(timer);
+        }
+      }, 0);
+    }
+
+  </script>
+  <script>
+    /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+    } 
+  </script>
+
+  <script>
+    $(function () {
+      $('a[data-toggle="modal"]').on('click', function (e) {
         e.preventDefault();
         var target = $(this).attr('data-target');
         $(target).modal('show');
       });
     });
-    </script>    
+
+    jQuery('#history-table table').DataTable();
+
+    function viewLetter(content) {
+  var modalBody = document.querySelector("#letterModal .modal-body");
+  modalBody.innerHTML = content;
+  jQuery("#letterModal").modal();
+  }
+
+  </script>
 </body>
 
 </html>

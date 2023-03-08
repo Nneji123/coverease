@@ -19,7 +19,7 @@ from logout import logout
 from googles import google_login
 from github import github_login
 from register import register
-from models import User, GoogleUser, GithubUser, db
+from models import User, db
 # from models import (
 #     Admins,
 #     AdminsView,
@@ -73,17 +73,8 @@ app.config["GITHUB_OAUTH_CLIENT_SECRET"] = os.environ.get("GITHUB_OAUTH_CLIENT_S
 @login_manager.user_loader
 def load_user(user_id):
     user = User.query.filter_by(id=user_id).first()
-    google_user = GoogleUser.query.filter_by(id=user_id).first()
-    github_user = GithubUser.query.filter_by(id=user_id).first()
     try:
-        if user:
-            return user
-        elif github_user:
-            return github_user
-        elif google_user:
-            return google_user
-        else:
-            return None
+        return user
     except (sqlalchemy.exc.OperationalError) as e:
         return render_template("error.html", e="Database not found")
 

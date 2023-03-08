@@ -1,6 +1,7 @@
 import openai
 import os
 from dotenv import load_dotenv
+from models import Letter, db, User
 
 load_dotenv()
 
@@ -30,10 +31,16 @@ def generate_cover_letter(company_name, name, job_description, skills):
     cover_letter = response.choices[0].text.strip()
     return cover_letter
 
-# company_name = "Acme Inc."
-# name = "John Doe"
-# job_description = "Software Engineer"
-# skills = "Python, Django, React"
+def get_num_letters_for_user(user_id):
+    num_letters = Letter.query.filter_by(user_id=user_id).count()
+    return num_letters
 
-# cover_letter = generate_cover_letter(company_name, name, job_description, skills)
-# print(cover_letter)
+
+def get_last_two_job_descriptions_for_user(user_id):
+    letters = Letter.query.filter_by(user_id=user_id).order_by(Letter.id.desc()).limit(2).all()
+    job_descriptions = [letter.job_description for letter in letters]
+    return job_descriptions
+
+def letter_history(user_id):
+    letters = Letter.query.filter_by(user_id=user_id).all()
+    return letters

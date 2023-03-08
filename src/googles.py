@@ -1,9 +1,10 @@
 from flask import Flask, redirect, url_for, request, render_template, flash, session
 from flask_login import LoginManager, login_user
 from flask_dance.contrib.google import make_google_blueprint, google
-from models import GoogleUser, db
+from models import User, db
 import sqlalchemy
 
+from utils import get_num_letters_for_user
 
 google_login = make_google_blueprint(
     scope=["profile", "email"],
@@ -22,18 +23,21 @@ def signin_google():
         email = resp.json()['email']
         username = resp.json()['given_name']
         picture = resp.json()['picture']
-        print(picture, email, username)
-        user = GoogleUser.query.filter_by(email=email).first()
+        # print(picture, email, username)
+        session["picture"] = picture
+        session["email"] = email
+        session["username"] = username
+        user = User.query.filter_by(email=email).first()
         if user:
             login_user(user)
-            return render_template("index.html", username=username, picture=picture, email=email)
+            return redirect(url_for("home.show"))
         else:
             try:
-                new_user = GoogleUser(username=username, email=email, picture=picture)
+                new_user = User(username=username, email=email, picture=picture)
                 db.session.add(new_user)
                 db.session.commit()
                 login_user(new_user)
-                return render_template("index.html", username=username, picture=picture, email=email)
+                return redirect(url_for("home.show"))
             except sqlalchemy.exc.IntegrityError as e:
                 db.session.rollback()
                 print(e)
