@@ -4,9 +4,7 @@ WORKDIR /app
 
 RUN apt-get -y update && apt-get install -y \
   wget \
-  ffmpeg \ 
-  libsm6 \
-  libxext6
+  wkhtmltopdf
 
 RUN pip install --upgrade setuptools 
 
@@ -18,4 +16,4 @@ ADD . .
 
 RUN cd src && python init.py
 
-CMD python app.py
+CMD gunicorn app:app 

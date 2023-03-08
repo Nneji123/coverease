@@ -1,28 +1,22 @@
-from flask import Flask, redirect, url_for, request, render_template, flash, session
-from flask_login import LoginManager, login_user
-from flask_dance.contrib.google import make_google_blueprint, google
-from models import User, db
 import sqlalchemy
+from flask import flash, redirect, session, url_for
+from flask_dance.contrib.google import google, make_google_blueprint
+from flask_login import login_user
 
-from utils import get_num_letters_for_user
+from models import User, db
 
 google_login = make_google_blueprint(
-    scope=["profile", "email"],
-    redirect_to="google.signin_google"
-    
+    scope=["profile", "email"], redirect_to="google.signin_google"
 )
-
-login_manager = LoginManager()
-login_manager.init_app(google_login)
 
 # Route to redirect to Google OAuth page
 @google_login.route("/")
 def signin_google():
     if google.authorized:
         resp = google.get("/oauth2/v1/userinfo")
-        email = resp.json()['email']
-        username = resp.json()['given_name']
-        picture = resp.json()['picture']
+        email = resp.json()["email"]
+        username = resp.json()["given_name"]
+        picture = resp.json()["picture"]
         # print(picture, email, username)
         session["picture"] = picture
         session["email"] = email

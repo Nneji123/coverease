@@ -1,16 +1,19 @@
-import openai
 import os
+
+import openai
 from dotenv import load_dotenv
-from models import Letter, db, User
+
+from models import Letter
 
 load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_KEY")
 
+
 def generate_cover_letter(company_name, name, job_description, skills):
     """
     The generate_cover_letter function takes in a company name, job description, and list of skills. It then uses the OpenAI API to generate a cover letter for the given inputs. The function returns the generated cover letter as a string.
-    
+
     :param company_name: Address the company in the cover letter
     :param name: Personalize the cover letter
     :param job_description: Highlight the skills in the cover letter
@@ -31,15 +34,22 @@ def generate_cover_letter(company_name, name, job_description, skills):
     cover_letter = response.choices[0].text.strip()
     return cover_letter
 
+
 def get_num_letters_for_user(user_id):
     num_letters = Letter.query.filter_by(user_id=user_id).count()
     return num_letters
 
 
 def get_last_two_job_descriptions_for_user(user_id):
-    letters = Letter.query.filter_by(user_id=user_id).order_by(Letter.id.desc()).limit(2).all()
+    letters = (
+        Letter.query.filter_by(user_id=user_id)
+        .order_by(Letter.id.desc())
+        .limit(2)
+        .all()
+    )
     job_descriptions = [letter.job_description for letter in letters]
     return job_descriptions
+
 
 def letter_history(user_id):
     letters = Letter.query.filter_by(user_id=user_id).all()

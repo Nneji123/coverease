@@ -1,15 +1,12 @@
 import os
 
 import sqlalchemy
-from flask import Blueprint, redirect, render_template, request, url_for, flash
+from dotenv import load_dotenv
+from flask import Blueprint, flash, redirect, render_template, request, url_for, session
 from flask_login import LoginManager
 from werkzeug.security import generate_password_hash
-import sqlalchemy
 
-
-from models import db, User
-
-from dotenv import load_dotenv
+from models import User, db
 
 load_dotenv()
 
@@ -18,7 +15,6 @@ register = Blueprint("register", __name__, template_folder="./frontend")
 login_manager = LoginManager()
 login_manager.init_app(register)
 
-    
 
 @register.route("/register", methods=["GET", "POST"])
 def show():
@@ -33,11 +29,15 @@ def show():
                 hashed_password = generate_password_hash(password, method="sha256")
                 try:
                     new_user = User(
-                            username=username,
-                            email=email,
-                            password=hashed_password,
-                        )
+                        username=username,
+                        email=email,
+                        password=hashed_password,
+                    )
                     picture = "./static/images/profile_icon.png"
+                    session["picture"] = picture
+                    session["username"] = new_user.username
+                    session["email"] = new_user.email
+                    
                     db.session.add(new_user)
                     db.session.commit()
                     flash("You have successfully registered!", "success")
@@ -53,8 +53,8 @@ def show():
             else:
                 flash("Passwords do not match!")
                 return redirect(
-                        url_for("register.show") + "?error=passwords-do-not-match"
-                    )
+                    url_for("register.show") + "?error=passwords-do-not-match"
+                )
         else:
             flash("Please fill in all fields!", "danger")
             return redirect(url_for("register.show") + "?error=missing-fields")

@@ -1,10 +1,10 @@
-from flask import redirect, url_for, render_template, request, flash, Blueprint, session
-from flask_login import login_user, LoginManager
-from werkzeug.security import check_password_hash
-from models import User
 from dotenv import load_dotenv
+from flask import (Blueprint, flash, redirect, render_template, request,
+                   session, url_for)
+from flask_login import LoginManager, login_user
+from werkzeug.security import check_password_hash
 
-from utils import get_num_letters_for_user
+from models import User
 
 load_dotenv()
 
@@ -13,7 +13,6 @@ login = Blueprint(
 )
 login_manager = LoginManager()
 login_manager.init_app(login)
-
 
 
 @login.route("/logins", methods=["GET", "POST"])
@@ -26,8 +25,7 @@ def show():
             if check_password_hash(user.password, password):
                 login_user(user)
                 flash("You are logged in.")
-                print("You are logged in!")
-                picture="./static/images/profile_icon.png"
+                picture = "./static/images/profile_icon.png"
                 session["picture"] = picture
                 session["email"] = email
                 session["username"] = user.username

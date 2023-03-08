@@ -1,15 +1,5 @@
-"""
-This script contains configurations for running the application in different modes, development (DEV) and production (PROD).
-
-It loads the necessary environment variables from a .env file using the python-dotenv library and defines two dictionaries,
-one for each mode, that store the specific configuration values such as the database URI, login disabled, port, debug, mail server,
-mail port, mail username, mail password, mail use TLS, mail use SSL, and secret key. 
-
-These dictionaries can be used to set up the Flask
-application by accessing the required configuration values from the respective mode's dictionary.
-"""
-
 import os
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -22,8 +12,9 @@ configs = {
     "PROD": {
         "SQLALCHEMY_DATABASE_URI": POSTGRES,
         "LOGIN_DISABLED": False,
-        "PORT": 5000,
+        "PORT": 3000,
         "DEBUG": False,
+        # "SERVER_NAME": "http://coverease.live",
         "MAIL_SERVER": os.getenv("PROD_MAIL_SERVER"),
         "MAIL_PORT": os.getenv("PROD_MAIL_PORT"),
         "MAIL_USERNAME": os.getenv("PROD_MAIL_USERNAME"),
@@ -37,6 +28,7 @@ configs = {
         "LOGIN_DISABLED": True,
         "PORT": 3000,
         "DEBUG": True,
+        # "SERVER_NAME": "http://127.0.0.1:3000",
         "MAIL_SERVER": os.getenv("DEV_MAIL_SERVER"),
         "MAIL_PORT": int(os.getenv("DEV_MAIL_PORT")),
         "MAIL_USERNAME": os.getenv("DEV_MAIL_USERNAME"),

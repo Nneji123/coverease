@@ -369,7 +369,6 @@
                 <th scope="col">Job Description</th>
                 <th scope="col">Skills</th>
                 <th scope="col">View Cover Letter</th>
-                <th scope="col">Generate PDF</th>
               </tr>
             </thead>
             <tbody>
@@ -379,7 +378,8 @@
                   <td>{{ letter.job_description }}</td>
                   <td>{{ letter.skills }}</td>
                   <td><button type="button" onclick="viewLetter('{{ letter.content | replace('\n', '<br>') }}')" style="margin-top: 0px;" id="modal-btn">View</button></td>
-                  <td><button type="button" id="modal-btn" style="margin-top: 0px;">Generate PDF</button></td>
+                  <!-- <td><button type="button" class="btn btn-dark ml-5" id="generate-pdf-btn" data-toggle="modal" -->
+                    <!-- data-target="#pdf-modal">Generate PDF</button></td> -->
                 </tr>
               {% endfor %}
             </tbody>
@@ -421,59 +421,57 @@
         </div>
         <div class="modal-body">
           <p style="font-size: 13px;">Fill in the details to generate a Cover Letter PDF.</p>
-          <form>
+          <form method="post" action="/generate-pdf">
             <div class="form-row">
               <div class="form-group-modal col-md-6">
-                <input type="text" class="form-control" id="your-name" placeholder="Your Name">
+                <input type="text" class="form-control" id="your-name" placeholder="Your Name" name="your-name">
               </div>
               <div class="form-group-modal col-md-6">
-                <input type="text" class="form-control" id="your-address" placeholder="Your Address">
+                <input type="text" class="form-control" id="your-address" placeholder="Your Address" name="your-address">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group-modal col-md-6">
                 <input type="text" class="form-control" id="your-city-state-zip"
-                  placeholder="Your City, State ZIP Code">
-              </div>
+                  placeholder="Your City, State ZIP Code" name="your-city-state-zip">
+                 </div>
               <div class="form-group-modal col-md-6">
-                <input type="tel" class="form-control" id="your-phone-number" placeholder="Your Phone Number">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group-modal col-md-6">
-                <input type="email" class="form-control" id="your-email-address" placeholder="Your Email Address">
-              </div>
-              <div class="form-group-modal col-md-6">
-                <input type="date" class="form-control" id="date" placeholder="Date">
+                <input type="tel" class="form-control" id="your-phone-number" placeholder="Your Phone Number" name="your-phone-number">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group-modal col-md-6">
-                <input type="text" class="form-control" id="recipient-name" placeholder="Recipient Name">
+                <input type="email" class="form-control" id="your-email-address" placeholder="Your Email Address" name="your-email-address">
               </div>
               <div class="form-group-modal col-md-6">
-                <input type="text" class="form-control" id="recipient-title" placeholder="Recipient Title">
+                <input type="date" class="form-control" id="date" placeholder="Date" name="date">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group-modal col-md-6">
-                <input type="text" class="form-control" id="organization-name" placeholder="Organization Name">
+                <input type="text" class="form-control" id="recipient-name" placeholder="Recipient Name" name="recipient-name">
               </div>
               <div class="form-group-modal col-md-6">
-                <input type="text" class="form-control" id="organization-address" placeholder="Organization Address">
+                <input type="text" class="form-control" id="recipient-title" placeholder="Recipient Title" name="recipient-title">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group-modal col-md-6">
+                <input type="text" class="form-control" id="organization-name" placeholder="Organization Name" name="organization-name">
+              </div>
+              <div class="form-group-modal col-md-6">
+                <input type="text" class="form-control" id="organization-address" placeholder="Organization Address" name="organization-address">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group-modal col-md-6">
                 <input type="text" class="form-control" id="organization-city-state-zip"
-                  placeholder="Organization City, State ZIP Code">
+                  placeholder="Organization City, State ZIP Code" name="organization-city-state-zip">
               </div>
             </div>
+            <button type="button" id="modal-btn" data-dismiss="modal" style="margin-top: 0px;">Close</button>
+            <button type="submit" id="modal-btn" style="margin-top: 0px;">Download PDF</button>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="modal-btn" data-dismiss="modal" style="margin-top: 0px;">Close</button>
-          <button type="button" id="modal-btn" style="margin-top: 0px;">Download PDF</button>
         </div>
       </div>
     </div>

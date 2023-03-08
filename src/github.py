@@ -1,31 +1,30 @@
 import os
-from flask import Flask, redirect, url_for, flash, render_template, session
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from flask_dance.contrib.github import make_github_blueprint, github
-from dotenv import load_dotenv
-from models import User, db
-import sqlalchemy
 
+import sqlalchemy
+from dotenv import load_dotenv
+from flask import flash, redirect, session, url_for
+from flask_dance.contrib.github import github, make_github_blueprint
+from flask_login import login_user
+
+from models import User, db
 
 load_dotenv()
 
 github_login = make_github_blueprint(redirect_to="github.index")
-# app.register_blueprint(github_bp, url_prefix="/login")
+
 
 @github_login.route("/")
 def index():
     if not github.authorized:
         return redirect(url_for("github.login"))
     resp = github.get("/user")
-    email = resp.json()['email']
-    username = resp.json()['name']
-    picture = resp.json()['avatar_url']
-    
+    email = resp.json()["email"]
+    username = resp.json()["name"]
+    picture = resp.json()["avatar_url"]
+
     session["picture"] = picture
     session["email"] = email
     session["username"] = username
-    # print(resp)
-    print(picture, email, username)
     user = User.query.filter_by(email=email).first()
     if user:
         login_user(user)
@@ -42,5 +41,5 @@ def index():
             print(e)
         finally:
             db.session.close()
-    # flash("Unauthorized!", "danger")
-    # return redirect(url_for("login.show"))
+    flash("Unauthorized!", "danger")
+    return redirect(url_for("login.show"))
