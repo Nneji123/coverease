@@ -12,7 +12,7 @@ configs = {
     "PROD": {
         "SQLALCHEMY_DATABASE_URI": POSTGRES,
         "LOGIN_DISABLED": False,
-        "PORT": 3000,
+        "PORT": 5000,
         "DEBUG": False,
         "MAIL_SERVER": os.getenv("PROD_MAIL_SERVER"),
         "MAIL_PORT": os.getenv("PROD_MAIL_PORT"),
@@ -28,7 +28,7 @@ configs = {
         "PORT": 3000,
         "DEBUG": True,
         "MAIL_SERVER": os.getenv("DEV_MAIL_SERVER"),
-        "MAIL_PORT": int(os.getenv("DEV_MAIL_PORT")),
+        "MAIL_PORT": os.getenv("DEV_MAIL_PORT"),
         "MAIL_USERNAME": os.getenv("DEV_MAIL_USERNAME"),
         "MAIL_PASSWORD": os.getenv("DEV_MAIL_PASSWORD"),
         "MAIL_USE_TLS": True,
