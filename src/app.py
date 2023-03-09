@@ -10,7 +10,7 @@ from flask_admin import Admin
 from flask_login import LoginManager
 from flask_mail import Mail, Message
 from flask_sitemap import Sitemap
-from itsdangerous import URLSafeTimedSerializer
+from itsdangerous import TimedJSONWebSignatureSerializer
 from itsdangerous.exc import BadTimeSignature
 from werkzeug.security import generate_password_hash
 
@@ -67,7 +67,7 @@ app.register_blueprint(register)
 app.register_blueprint(github_login, url_prefix="/login")
 app.register_blueprint(google_login, url_prefix="/signin")
 
-serializer = URLSafeTimedSerializer("secret")
+serializer = TimedJSONWebSignatureSerializer("secret", expires_in=3600)
 
 app.config["GOOGLE_OAUTH_CLIENT_ID"] = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
 app.config["GOOGLE_OAUTH_CLIENT_SECRET"] = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
@@ -119,6 +119,15 @@ def internal_error(error):
             "error.html", e="There has been an internal server error!"
         ),
         500,
+    )
+    
+@app.errorhandler(401)
+def internal_error(error):
+    return (
+        render_template(
+            "error.html", e="You are not authorized to view this page!"
+        ),
+        401,
     )
     
 @app.route('/sitemap.xml', methods=['GET'])
@@ -177,7 +186,7 @@ def reset_password():
 @app.route("/<string:hashCode>", methods=["GET", "POST"])
 def hashcode(hashCode):
     try:
-        mail = serializer.loads(hashCode, salt="reset-password", max_age=6000)
+        mail = serializer.loads(hashCode, salt="reset-password", max_age=3600)
     except BadTimeSignature:
         flash("The password reset link has expired. Please request a new one.", "danger")
         return redirect(url_for("index.show"))
