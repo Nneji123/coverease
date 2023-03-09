@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import sqlalchemy
 from flask import flash, redirect, session, url_for
 from flask_dance.contrib.google import google, make_google_blueprint
@@ -17,20 +19,21 @@ def signin_google():
         email = resp.json()["email"]
         username = resp.json()["given_name"]
         picture = resp.json()["picture"]
-        # print(picture, email, username)
         session["picture"] = picture
         session["email"] = email
         session["username"] = username
         user = User.query.filter_by(email=email).first()
         if user:
             login_user(user)
+            user.last_logged_in_at = datetime.utcnow()
             return redirect(url_for("home.show"))
         else:
             try:
-                new_user = User(username=username, email=email, picture=picture)
+                new_user = User(username=username, email=email)
                 db.session.add(new_user)
                 db.session.commit()
                 login_user(new_user)
+                new_user.last_logged_in_at = datetime.utcnow()
                 return redirect(url_for("home.show"))
             except sqlalchemy.exc.IntegrityError as e:
                 db.session.rollback()

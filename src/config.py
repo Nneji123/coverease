@@ -23,7 +23,7 @@ configs = {
         "SECRET_KEY": os.getenv("PROD_SECRET_KEY"),
     },
     "DEV": {
-        "SQLALCHEMY_DATABASE_URI": SQLITE,
+        "SQLALCHEMY_DATABASE_URI": POSTGRES,
         "LOGIN_DISABLED": True,
         "PORT": 3000,
         "DEBUG": True,

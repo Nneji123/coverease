@@ -50,9 +50,9 @@ def generate_pdf():
         organization_city_state_zip = request.form.get(
             "organization-city-state-zip", ""
         )
-        config = pdfkit.configuration(
-            wkhtmltopdf=r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
-        )
+        # config = pdfkit.configuration(
+        #     wkhtmltopdf=r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+        # )
         letters = (
             Letter.query.filter_by(user_id=current_user.id)
             .order_by(Letter.id.desc())
@@ -75,7 +75,8 @@ def generate_pdf():
             organization_city_state_zip=organization_city_state_zip,
             content=content,
         )
-        pdf = pdfkit.from_string(rendered_template, False, configuration=config)
+        pdf = pdfkit.from_string(rendered_template, False)
+        # pdf = pdfkit.from_string(rendered_template, False, configuration=config)
 
         # Create a response containing the PDF and set headers to force download
         response = make_response(pdf)

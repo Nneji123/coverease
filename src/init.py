@@ -1,5 +1,4 @@
 import os
-from typing import Union
 
 from dotenv import load_dotenv
 from sqlalchemy.exc import IntegrityError
@@ -26,7 +25,7 @@ def create_user(username: str, email: str, password: str, is_admin):
 
 
 def main():
-    # make_dirs()
+    # db.drop_all()
     db.create_all()
     create_user("Ifeanyi", "ifeanyinneji777@gmail.com", "linda321", is_admin=False)
     ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")

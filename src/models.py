@@ -1,3 +1,4 @@
+from datetime import datetime
 import uuid
 
 from flask_admin import AdminIndexView
@@ -16,6 +17,8 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(100), nullable=True)
     hashCode = db.Column(db.String, nullable=True)
     is_admin = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    last_logged_in_at = db.Column(db.DateTime, nullable=True)
     letters = db.relationship("Letter", backref="user_letters", lazy=True, viewonly=True)
 
 
@@ -35,8 +38,8 @@ class LetterView(ModelView):
 
 
 class UserView(ModelView):
-    column_searchable_list = ["username", "email", "is_admin"]
-    column_filters = ["username", "email", "is_admin"]
+    column_searchable_list = ["username", "email", "is_admin", "created_at", "last_logged_in_at"]
+    column_filters = ["username", "email", "is_admin", "created_at", "last_logged_in_at"]
     column_exclude_list = ["password", "hashCode"]
     form_excluded_columns = ["id"]
 

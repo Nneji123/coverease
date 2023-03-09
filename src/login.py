@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from dotenv import load_dotenv
 from flask import (Blueprint, flash, redirect, render_template, request,
                    session, url_for)
@@ -24,7 +26,7 @@ def show():
         if user:
             if check_password_hash(user.password, password):
                 login_user(user)
-                flash("You are logged in.")
+                user.last_logged_in_at = datetime.utcnow()
                 picture = "./static/images/profile_icon.png"
                 session["picture"] = picture
                 session["email"] = email

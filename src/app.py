@@ -3,7 +3,7 @@ import os
 import css_inline
 import sqlalchemy
 from dotenv import load_dotenv
-from flask import (Flask, abort, flash, redirect, render_template, request,
+from flask import (Flask, flash, redirect, render_template, request,
                    url_for)
 from flask_admin import Admin
 from flask_login import LoginManager
@@ -73,40 +73,35 @@ def load_user(user_id):
         return render_template("error.html", e="Database not found")
 
 
-# @app.route("/500")
-# def error500():
-#     abort(500)
+@app.errorhandler(404)
+def not_found(e):
+    return (
+        render_template(
+            "error.html", e="The page you are looking for does not exist!"
+        ),
+        404,
+    )
 
 
-# @app.errorhandler(404)
-# def not_found(e):
-#     return (
-#         render_template(
-#             "/pages/error.html", e="The page you are looking for does not exist!"
-#         ),
-#         404,
-#     )
+@app.errorhandler(400)
+def bad_requests(e):
+    return (
+        render_template(
+            "error.html",
+            e="The browser (or proxy) sent a request that this server could not understand.",
+        ),
+        400,
+    )
 
 
-# @app.errorhandler(400)
-# def bad_requests(e):
-#     return (
-#         render_template(
-#             "/pages/error.html",
-#             e="The browser (or proxy) sent a request that this server could not understand.",
-#         ),
-#         400,
-#     )
-
-
-# @app.errorhandler(500)
-# def internal_error(error):
-#     return (
-#         render_template(
-#             "/pages/error.html", e="There has been an internal server error!"
-#         ),
-#         500,
-#     )
+@app.errorhandler(500)
+def internal_error(error):
+    return (
+        render_template(
+            "error.html", e="There has been an internal server error!"
+        ),
+        500,
+    )
 
 
 def send_mail(to, template, subject, link, username, **kwargs):

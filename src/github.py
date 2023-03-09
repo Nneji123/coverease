@@ -1,4 +1,4 @@
-import os
+from datetime import datetime
 
 import sqlalchemy
 from dotenv import load_dotenv
@@ -28,13 +28,15 @@ def index():
     user = User.query.filter_by(email=email).first()
     if user:
         login_user(user)
+        user.last_logged_in_at = datetime.utcnow()
         return redirect(url_for("home.show"))
     else:
         try:
-            new_user = User(username=username, email=email, picture=picture)
+            new_user = User(username=username, email=email)
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
+            new_user.last_logged_in_at = datetime.utcnow()
             return redirect(url_for("home.show"))
         except sqlalchemy.exc.IntegrityError as e:
             db.session.rollback()

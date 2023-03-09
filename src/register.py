@@ -1,4 +1,4 @@
-import os
+from datetime import datetime
 
 import sqlalchemy
 from dotenv import load_dotenv
@@ -11,7 +11,7 @@ from models import User, db
 load_dotenv()
 
 
-register = Blueprint("register", __name__, template_folder="./frontend")
+register = Blueprint("register", __name__, template_folder="./templates")
 login_manager = LoginManager()
 login_manager.init_app(register)
 
@@ -37,7 +37,7 @@ def show():
                     session["picture"] = picture
                     session["username"] = new_user.username
                     session["email"] = new_user.email
-                    
+                    new_user.last_logged_in_at = datetime.utcnow()
                     db.session.add(new_user)
                     db.session.commit()
                     flash("You have successfully registered!", "success")
