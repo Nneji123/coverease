@@ -1,4 +1,5 @@
 import os
+import datetime
 
 import css_inline
 import sqlalchemy
@@ -8,6 +9,7 @@ from flask import (Flask, flash, redirect, render_template, request,
 from flask_admin import Admin
 from flask_login import LoginManager
 from flask_mail import Mail, Message
+from flask_sitemap import Sitemap
 from itsdangerous import URLSafeTimedSerializer
 from itsdangerous.exc import BadTimeSignature
 from werkzeug.security import generate_password_hash
@@ -25,7 +27,23 @@ from register import register
 load_dotenv()
 
 app = Flask(__name__, template_folder="./templates", static_folder="./static")
+sitemap = Sitemap(app=app)
 
+@sitemap.register_generator
+def sitemap_xml():
+    # Return a list of URLs to include in the sitemap
+    urls = []
+    # Add your website URLs here
+    urls.append({'loc': url_for('home.show', _external=True), 'lastmod': datetime.datetime.now().strftime('%Y-%m-%d')})
+    urls.append({'loc': url_for('index.show', _external=True), 'lastmod': datetime.datetime.now().strftime('%Y-%m-%d')})
+    urls.append({'loc': url_for('admin.index', _external=True), 'lastmod': datetime.datetime.now().strftime('%Y-%m-%d')})
+    urls.append({'loc': url_for('login.show', _external=True), 'lastmod': datetime.datetime.now().strftime('%Y-%m-%d')})
+    urls.append({'loc': url_for('logout.show', _external=True), 'lastmod': datetime.datetime.now().strftime('%Y-%m-%d')})
+    urls.append({'loc': url_for('google.signin_google', _external=True), 'lastmod': datetime.datetime.now().strftime('%Y-%m-%d')})
+    urls.append({'loc': url_for('github.index', _external=True), 'lastmod': datetime.datetime.now().strftime('%Y-%m-%d')})
+    urls.append({'loc': url_for('register.show', _external=True), 'lastmod': datetime.datetime.now().strftime('%Y-%m-%d')})
+    # Add more URLs here
+    return urls
 
 SERVER_MODE = os.getenv("SERVER_MODE")
 if SERVER_MODE in configs:
@@ -102,6 +120,15 @@ def internal_error(error):
         ),
         500,
     )
+    
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap_xml():
+    return sitemap.sitemap_xml(), 200, {'Content-Type': 'application/xml'}
+
+@app.route('/sitemap_index.xml', methods=['GET'])
+def sitemap_index_xml():
+    return sitemap.sitemap_index(), 200, {'Content-Type': 'application/xml'}
+
 
 
 def send_mail(to, template, subject, link, username, **kwargs):
@@ -150,7 +177,7 @@ def reset_password():
 @app.route("/<string:hashCode>", methods=["GET", "POST"])
 def hashcode(hashCode):
     try:
-        mail = serializer.loads(hashCode, salt="reset-password", max_age=600)
+        mail = serializer.loads(hashCode, salt="reset-password", max_age=6000)
     except BadTimeSignature:
         flash("The password reset link has expired. Please request a new one.", "danger")
         return redirect(url_for("index.show"))
