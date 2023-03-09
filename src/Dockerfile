@@ -41,6 +41,6 @@ ENV PROD_MAIL_PASSWORD value
 ENV PROD_SECRET_KEY value
 ENV PROD_SENDER_EMAIL value
 
-RUN cd src && python init.py
+RUN python init.py
 
 CMD gunicorn app:app 
