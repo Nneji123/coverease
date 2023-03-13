@@ -1,6 +1,7 @@
 # Commands to start on workspace startup
 tasks:
   - command: |
+      cd src
       docker-compose up -d --build 
 # Ports to expose on workspace startup
 ports:
